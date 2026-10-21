@@ -81,7 +81,7 @@ def pizza_order_submit():
     db.session.add(pizza)
 
     flash('Your order has been submitted!')
-    return redirect(url_for('/'))
+    return redirect(url_for('home'))
 
 @app.route('/fulfill', methods=['POST'])
 def fulfill_order():
