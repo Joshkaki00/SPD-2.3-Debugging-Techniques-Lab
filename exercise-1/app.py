@@ -67,7 +67,7 @@ def pizza_order_submit():
     order_name = request.form.get('name')
     pizza_size_str = request.form.get('size')
     crust_type_str = request.form.get('crust_type')
-    toppings_list = request.form.get('toppings')
+    toppings_list = request.form.getlist('toppings')
 
     pizza = Pizza(
         order_name=order_name,
