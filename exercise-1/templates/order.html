@@ -30,7 +30,7 @@
         <p>
             {% for crust_type in crust_types %}
             <label>
-                <input type="radio" name="crust_type" value="{{ crust_type.name }}">
+                <input type="radio" name="crust_type" value="{{ crust_type.name }}" required>
                 {{ crust_type.value }}
             </label><br>
             {% endfor %}
