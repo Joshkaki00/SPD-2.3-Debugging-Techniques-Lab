@@ -75,7 +75,7 @@ def pizza_order_submit():
         crust_type=crust_type_str)
     print(pizza.size)
 
-    for topping_str in ToppingType:
+    for topping_str in toppings_list:
         pizza.toppings.append(PizzaTopping(topping_type=topping_str))
 
     db.session.add(pizza)
