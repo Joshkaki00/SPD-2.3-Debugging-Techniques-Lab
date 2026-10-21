@@ -18,7 +18,7 @@
         <p>
             {% for size in sizes %}
             <label>
-                <input type="radio" name="pizza_size" value="{{ size.name }}"> 
+                <input type="radio" name="size" value="{{ size.name }}" required> 
                 {{ size.value }}
             </label><br>
             {% endfor %}
