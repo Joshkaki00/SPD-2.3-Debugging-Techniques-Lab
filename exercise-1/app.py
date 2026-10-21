@@ -79,6 +79,7 @@ def pizza_order_submit():
         pizza.toppings.append(PizzaTopping(topping_type=topping_str))
 
     db.session.add(pizza)
+    db.session.commit()
 
     flash('Your order has been submitted!')
     return redirect(url_for('home'))
