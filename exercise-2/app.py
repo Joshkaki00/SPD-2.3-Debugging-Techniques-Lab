@@ -42,7 +42,7 @@ def results():
     url = 'http://api.openweathermap.org/data/2.5/weather'
     params = {
         'appid': API_KEY,
-        'place': city,
+        'q': city,
         'units': units
     }
     result_json = requests.get(url, params=params).json()
