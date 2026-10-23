@@ -36,8 +36,8 @@ def get_letter_for_units(units):
 @app.route('/results')
 def results():
     """Displays results for current weather conditions."""
-    city = request.args.get('users_city')
-    units = request.args.get('requested_units')
+    city = request.args.get('place')
+    units = request.args.get('units')
 
     url = 'http://api.openweathermap.org/data/2.5/weather'
     params = {
