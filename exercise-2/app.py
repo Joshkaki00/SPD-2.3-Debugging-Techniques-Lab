@@ -47,6 +47,7 @@ def results():
     }
     result_json = requests.get(url, params=params).json()
 
+    print(result_json['name'])
     context = {
         'date': datetime.now(),
         'city': result_json['name'],
