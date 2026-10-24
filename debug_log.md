@@ -31,7 +31,15 @@ That failed the `toppingtype` check and tried to insert `('S', 2)`. I thought a 
 
 ## Exercise 2
 
-[[Your answer goes here!]]
+I expected a city and a unit choice to come back as a weather page. The app would not even start. `import requests` on line 2 pulled in `urllib3`, and the last frame was `ModuleNotFoundError: No module named 'urllib3.packages.six.moves'`. The packages were installed. `requirements.txt` had `urllib3==1.26.2`, and the venv is Python 3.13. I upgraded `requests` to 2.34.2 and `urllib3` to 2.8.0.
+
+Submitting San Francisco in Fahrenheit then 500'd on line 52, `KeyError: 'name'`. I printed `result_json` and got `{'cod': '400', 'message': 'Nothing to geocode'}`. The browser URL was `/results?city=San+Francisco&units=imperial`. The handler was calling `get('users_city')` and `get('requested_units')`, so both values were `None`. I first renamed the API params to those same wrong names, which did not help. The `get` strings have to match the URL. I also tried `get('place')`. `place` is not on the URL either. `get('city')` and `get('units')` are the ones that match.
+
+The city was finally in the variable, and the API still answered `Nothing to geocode`. `params` was sending it as `place`. The current weather docs call the city parameter `q`, as in `q={city name}`. I changed that key to `q`. The next print had `'name': 'San Francisco'` and `'cod': 200`.
+
+The crash moved to line 55, `KeyError: 'temperature'`. Inside `main` the print showed `temp`, `feels_like`, `temp_min`, and the rest. No `temperature`. I read `temp` instead. The page loaded at about 65 F.
+
+Celsius came back around 18 with wind speed 7.72. Kelvin came back around 291 with the same wind speed 7.72. Fahrenheit wind was 17.27. The results template always wrote `miles/hour` after the wind number, which only fits the Fahrenheit speed. Metric and Kelvin wind from this API is meters per second. I added `get_wind_units`, same shape as `get_letter_for_units`, passed `wind_units` in the context, and printed `{{ wind_units }}` in the template. All three submits then returned 200.
 
 ## Exercise 3
 
