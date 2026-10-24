@@ -58,7 +58,8 @@ def results():
         'temp': result_json['main']['temp'],
         'humidity': result_json['main']['humidity'],
         'wind_speed': result_json['wind']['speed'],
-        'units_letter': get_letter_for_units(units)
+        'units_letter': get_letter_for_units(units),
+        'wind_units': get_wind_units(units)
     }
 
     return render_template('results.html', **context)
