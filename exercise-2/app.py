@@ -33,6 +33,9 @@ def get_letter_for_units(units):
     """Returns a shorthand letter for the given units."""
     return 'F' if units == 'imperial' else 'C' if units == 'metric' else 'K'
 
+def get_wind_units(units):
+    return 'miles/hour' if units == 'imperial' else 'meters/second'
+
 @app.route('/results')
 def results():
     """Displays results for current weather conditions."""
