@@ -16,6 +16,7 @@ def merge_sort(arr):
     merge_sort(left_side)
     merge_sort(right_side)
 
+    print('halves', left_side, right_side)
     i = j = k = 0
 
     # Copy data to temp arrays L[] and R[]
