@@ -36,6 +36,7 @@ def merge_sort(arr):
     print('i', i, 'j', j, 'k', k, 'right', right_side)
     while j < len(right_side):
         arr[k] = right_side[j]
+        j += 1
         k += 1
 
 def binary_search(arr, elem):
