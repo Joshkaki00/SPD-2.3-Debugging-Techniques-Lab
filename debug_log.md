@@ -47,4 +47,14 @@ Celsius came back around 18 with wind speed 7.72. Kelvin came back around 291 wi
 
 ## Exercise 3
 
-[[Your answer goes here!]]
+I used trace backward on the crashes. I started at the last frame in `utils.py` and checked the index or the type that line used. I used divide and conquer on the merge. I printed the two halves after the recursive calls. If the halves were already sorted and `arr` was not, I only looked at the merge loops.
+
+I expected `merge_sort` to turn `[7, 4, 9, 3, 5, 6, 1, 2]` into `[1, 2, 3, 4, 5, 6, 7, 9]`, then `binary_search` to return index `4` for `5`. The first run died with `IndexError` in `merge_sort`. The traceback showed line 16 and line 37. Line 16 is just `merge_sort(left_side)` calling itself. Line 37 was the crash, `arr[k] = right_side[i]`.
+
+I printed `i`, `j`, `k`, and `right_side` above that write. One hit was `i 1 j 0 k 1 right [4]`. The `while` only promises `j` is in range. `right_side[1]` does not exist. I changed it to `right_side[j]`. I also added `k += 1` after leftover writes because `k` is the write slot in `arr`.
+
+`merge_sort` then finished and printed `[9, 7, 6, 5, 4, 3, 2, 1]`. `binary_search` crashed on line 53, `TypeError: list indices must be integers or slices, not float`. Line 50 was `mid = (high + low) / 2`. In Python 3, `/` makes a float. I switched it to `//`, same as the midpoint in `merge_sort`. I printed `mid` and `type(mid)` so I could see `<class 'int'>`.
+
+The list was still high to low. Line 23 used `> `, so the bigger front value was written first. I changed it to `<=` so the smaller one wins. The next run looked worse, `[1, 2, 3, 4, 6, 2, 9, 2]`, and the index of `5` was `-1`. The halves print showed `[5, 6]` and `[1, 2]`, already sorted, then `i 2 j 2 k 2`. Both sides were consumed and `k` had only moved twice. The leftover left loop still did not bump `k`, so `6` overwrote `5`. I added `k += 1` there too.
+
+After that the list was `[1, 2, 3, 4, 5, 6, 7, 9]` and `k` was `8` on the last merge. `binary_search` still returned `-1`. The mid prints were `3` then `5`. `arr[3]` is `4`, so `low` became `4`. `arr[5]` is `6`, so `high` became `4`. `5` sits at index `4`. The loop was `while low < high`, and `4 < 4` is false, so it never read that last slot. I changed it to `while low <= high`. The next run printed `mid 4` and `Index of 5 is: 4`.
