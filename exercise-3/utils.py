@@ -47,7 +47,7 @@ def binary_search(arr, elem):
     high = len(arr) - 1
     mid = 0
   
-    while low < high: 
+    while low <= high: 
   
         mid = (high + low) // 2
         print('mid', mid, 'type', type(mid))
