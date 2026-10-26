@@ -24,6 +24,7 @@ def merge_sort(arr):
         if left_side[i] <= right_side[j]:
             arr[k] = left_side[i]
             i += 1
+            k += 1
         else:
             arr[k] = right_side[j]
             j += 1
