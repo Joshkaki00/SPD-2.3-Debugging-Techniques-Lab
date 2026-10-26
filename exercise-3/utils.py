@@ -33,6 +33,7 @@ def merge_sort(arr):
     while i < len(left_side):
         arr[k] = left_side[i]
         i += 1
+        k += 1
 
     print('i', i, 'j', j, 'k', k, 'right', right_side)
     while j < len(right_side):
