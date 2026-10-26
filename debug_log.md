@@ -15,6 +15,8 @@ _Then I noticed another bug ..._
 
 ## Exercise 1
 
+I used trace backward on the crashes. I started at the last frame in my file and walked to the bad name or the bad value. I used trace forward after the redirect worked and the homepage stayed empty. I followed `pizza_order_submit` from `db.session.add(pizza)` and from `print(pizza.size)`.
+
 I expected a new order to show up on the homepage after submit. The homepage and the form both loaded. Submit is where it broke.
 
 `POST /order` came back 500. Tracing backward through the traceback landed me on line 79 of `app.py`, in `pizza_order_submit`, on `PizzaTopping(topping=topping_str)`. The message was `TypeError: 'topping' is an invalid keyword argument for PizzaTopping`. I thought `topping_str` was missing, and then I thought the class only took integers. The columns are `id`, `topping_type`, and `pizza_id`. `topping` is not one of them, so I renamed the keyword to `topping_type`.
@@ -30,6 +32,8 @@ Once it saved, every topping was on the pizza. The loop read `for topping_str in
 That failed the `toppingtype` check and tried to insert `('S', 2)`. I thought a checkbox would submit a bool. It submits the value, like `SPINACH`. `get` returned that as one string, and the loop walked the letters. `getlist('toppings')` keeps each checked name whole. I switched line 70 to `getlist`. The next POST was 302, the homepage was 200, and only the toppings I checked were listed.
 
 ## Exercise 2
+
+I used trace backward on this one. I started at each traceback and walked to the value that line was reading.
 
 I expected a city and a unit choice to come back as a weather page. The app would not even start. `import requests` on line 2 pulled in `urllib3`, and the last frame was `ModuleNotFoundError: No module named 'urllib3.packages.six.moves'`. The packages were installed. `requirements.txt` had `urllib3==1.26.2`, and the venv is Python 3.13. I upgraded `requests` to 2.34.2 and `urllib3` to 2.8.0.
 
