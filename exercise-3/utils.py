@@ -47,7 +47,7 @@ def binary_search(arr, elem):
   
     while low < high: 
   
-        mid = (high + low) / 2
+        mid = (high + low) // 2
   
         # Check if elem is present at mid 
         if arr[mid] < elem: 
